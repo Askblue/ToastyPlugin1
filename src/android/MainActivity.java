@@ -144,7 +144,7 @@ package_name = "com.stanleyidesis.cordova.plugin";
 
     void manageMainPermissions()
     {
-
+  
 /*
         ArrayList<String> permissionsArray = new ArrayList<>(2);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
