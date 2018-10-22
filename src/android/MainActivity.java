@@ -79,8 +79,11 @@ public class MainActivity extends AppCompatActivity {
        Log.v("view ID: ", String.valueOf(resources.getIdentifier("activity_main", "layout", "com.stanleyidesis.toastyplugintest")));
 
 package_name = "com.stanleyidesis.cordova.plugin";
-      // Intent intent = getIntent();
-       //String activity_main_connect_buttonData = intent.getStringExtra("activity_main_connect_button");
+       Intent intent = getIntent();
+       String serverName = intent.getStringExtra("serverName");
+       String sessionID = intent.getStringExtra("sessionID");
+       String userName = intent.getStringExtra("userName");
+      //  String activity_main_connect_buttonData = intent.getStringExtra("activity_main_connect_button");
       //  setContentView(R.layout.activity_main);
    //Log.v("activity_main_connect_buttonData: ", activity_main_connect_buttonData);
       //  _app = new TestConnectMeetingApplication();
@@ -100,10 +103,10 @@ package_name = "com.stanleyidesis.cordova.plugin";
         _userView = (EditText)findViewById(resources1.getIdentifier("activity_main_user", "id", package_name1));
         _connectButton = (Button)findViewById(resources1.getIdentifier("activity_main_connect_button", "id", package_name1));
 
+        _serverView.setText(serverName);
+        _sessionIdView.setText(sessionID);
+        _userView.setText(userName);
  //Log.v("activity_main_server: ", String.valueOf(resources1.getIdentifier("activity_main_server", "layout", package_name1)));
-
-
-
 
         _connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +147,7 @@ package_name = "com.stanleyidesis.cordova.plugin";
 
     void manageMainPermissions()
     {
-  
+
 /*
         ArrayList<String> permissionsArray = new ArrayList<>(2);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)

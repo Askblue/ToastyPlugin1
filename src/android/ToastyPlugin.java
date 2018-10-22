@@ -53,6 +53,9 @@ public class ToastyPlugin extends CordovaPlugin {
        public void run() {
 
           Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), MainActivity.class);
+          intentScan.putExtra("serverName", serverName);
+          intentScan.putExtra("sessionID", sessionID);
+          intentScan.putExtra("userName", userName);
 
           //String package_name = cordova.getApplication().getPackageName();
           //Resources resources = getApplication().getResources();
@@ -61,7 +64,7 @@ public class ToastyPlugin extends CordovaPlugin {
          // Log.v("Resources name: ", resources.String);
         //  Log.v("view ID0: ", String.valueOf(resources.getIdentifier("activity_main", "layout", package_name)));
 
-          //intentScan.putExtra("activity_main_connect_button", String.valueOf(cordova.getActivity().getResources().getIdentifier("activity_main_connect_button", "layout", cordova.getActivity().getPackageName())));
+        //  intentScan.putExtra("activity_main_connect_button", String.valueOf(cordova.getActivity().getResources().getIdentifier("activity_main_connect_button", "layout", cordova.getActivity().getPackageName())));
 
         //  Log.v("activity_main_connect_button0 name: ", String.valueOf(cordova.getActivity().getResources().getIdentifier("activity_main_connect_button", "layout", cordova.getActivity().getPackageName())));
         //   Context context = cordova.getActivity()
