@@ -127,7 +127,10 @@ package_name = "com.stanleyidesis.cordova.plugin";
     void launchIntent()
     {
 
-      Intent intentScan = new Intent(this, TestConnectMeetingApplication.class);
+    //  Intent intentScan = new Intent(this, TestConnectMeetingApplication.class);
+    //  Intent intentScan = new Intent("com.stanleyidesis.cordova.plugin.TestConnectMeetingApplication");
+
+      Intent intentScan = getPackageManager().getLaunchIntentForPackage("com.clearone.testconnectmeeting");
 
       this.startActivity(intentScan);
 
