@@ -25,9 +25,9 @@ public class ToastyPlugin extends CordovaPlugin {
         callbackContext.error("\"" + action + "\" is not a recognized action.");
         return false;
       }
-      String serverName;
-      String sessionID;
-      String userName;
+      final String serverName;
+      final String sessionID;
+      final String userName;
       try {
 
         JSONObject options = args.getJSONObject(0);
