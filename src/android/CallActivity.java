@@ -2,6 +2,7 @@ package com.stanleyidesis.cordova.plugin;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
+import android.util.Log;
 
 import android.media.AudioManager;
 import android.support.v4.app.Fragment;
@@ -47,7 +48,15 @@ public class CallActivity extends AppCompatActivity implements SptCallFragment.O
         setContentView(resources.getIdentifier("content_main", "layout", package_name));
 
         int callId = getIntent().getIntExtra(EXTRA_CALL_ID, SptCallID.SPT_INVALID_CALLID);
+
+
         _callID = new SptCallID(callId);
+
+        if(_callID != null) {
+          Log.v("two: ","call Id valid");
+        } else {
+          Log.v("two: ","bolas");
+        }
 
         _app = SptIMSDKApp.getInstance();
         //Toolbar tb = (Toolbar)findViewById(R.id.activity_call_tool_bar);

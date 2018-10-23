@@ -12,11 +12,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.util.Log;
 
+import android.app.Application;
+import android.support.annotation.CallSuper;
+
+import com.clearone.sptimpublicsdk.SptIMSDKApp;
+
 import android.util.Log;
 import android.content.res.Resources;
 
 public class ToastyPlugin extends CordovaPlugin {
   private static final String DURATION_LONG = "long";
+
   @Override
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
@@ -25,6 +31,10 @@ public class ToastyPlugin extends CordovaPlugin {
         callbackContext.error("\"" + action + "\" is not a recognized action.");
         return false;
       }
+
+
+
+
       final String serverName;
       final String sessionID;
       final String userName;
@@ -42,11 +52,14 @@ public class ToastyPlugin extends CordovaPlugin {
       // Create the toast
       Toast toast = Toast.makeText(cordova.getActivity(), serverName + " " + sessionID + " " + userName, Toast.LENGTH_LONG);
       // Display toast
-      toast.show();
+      //toast.show();
 
     //  Intent yourIntent = new Intent(this.getActivity().getApplicationContext(), MainActivity.class);
     //  cordova.getActivity().startActivity(yourIntent);
       final CordovaPlugin that = this;
+
+      SptIMSDKApp app1 = SptIMSDKApp.getInstance();
+      app1.getSptIMSDK(that.cordova.getActivity().getBaseContext());
 
       cordova.getActivity().runOnUiThread(new Runnable() {
        @Override

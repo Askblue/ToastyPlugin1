@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                  Log.v("main: ","onCallEventConnected");
                     Intent i = new Intent(MainActivity.this, CallActivity.class);
                     if(_callID != null)
                         i.putExtra(CallActivity.EXTRA_CALL_ID, _callID.intValue());
@@ -77,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
        Log.v("package name: ", package_name);
       // Log.v("Resources name: ", resources.String);
-       Log.v("view ID: ", String.valueOf(resources.getIdentifier("activity_main", "layout", "com.stanleyidesis.toastyplugintest")));
+       Log.v("view ID: ", String.valueOf(resources.getIdentifier("activity_main", "layout", package_name)));
 
-package_name = "com.stanleyidesis.cordova.plugin";
+//package_name = "com.stanleyidesis.cordova.plugin";
        Intent intent = getIntent();
        String serverName = intent.getStringExtra("serverName");
        String sessionID = intent.getStringExtra("sessionID");
@@ -111,7 +112,7 @@ package_name = "com.stanleyidesis.cordova.plugin";
         _serverView.setText(serverName);
         _sessionIdView.setText(sessionID);
         _userView.setText(userName);
- //Log.v("activity_main_server: ", String.valueOf(resources1.getIdentifier("activity_main_server", "layout", package_name1)));
+// Log.v("activity_main_server: ", String.valueOf(resources1.getIdentifier("activity_main_server", "layout", package_name1)));
 
         _connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +126,12 @@ package_name = "com.stanleyidesis.cordova.plugin";
                   //  launchIntent();
                     SptJoinCall joinCall = new SptJoinCall(user, "", sessionId, server);
                     _callID = _sdk.joinCall(joinCall);
-                    launchIntent();
+                    if(_callID != null) {
+                      Log.v("one: ","call Id valid");
+                      Log.v("_callID: ",String.valueOf(_callID));
+                    }
+
+                  //  launchIntent();
                 }
             }
         });
@@ -135,19 +141,23 @@ package_name = "com.stanleyidesis.cordova.plugin";
     void launchIntent()
     {
 
-    Intent intentScan = new Intent(this, CallActivity.class);
+    //Intent intentScan = new Intent(this, CallActivity.class);
+
+    Intent i = new Intent(MainActivity.this, CallActivity.class);
+    if(_callID != null)
+        i.putExtra(CallActivity.EXTRA_CALL_ID, _callID.intValue());
     // Intent intentScan = new Intent("com.stanleyidesis.cordova.plugin.TestConnectMeetingApplication");
 
     //  Intent intentScan = getPackageManager().getLaunchIntentForPackage("com.clearone.testconnectmeeting");
 
-      this.startActivity(intentScan);
+      this.startActivity(i);
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // _sdk.removeCallObserver(_callObserver);
+        _sdk.removeCallObserver(_callObserver);
     }
 
     void manageMainPermissions()

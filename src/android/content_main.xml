@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CallActivity"
     app:theme="@style/Theme.AppCompat.NoActionBar"
+    android:background="#008577"
     android:fitsSystemWindows="false">
 <FrameLayout
     android:id="@+id/activity_call_content"
