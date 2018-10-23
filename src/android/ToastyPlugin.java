@@ -23,6 +23,10 @@ import android.content.res.Resources;
 public class ToastyPlugin extends CordovaPlugin {
   private static final String DURATION_LONG = "long";
 
+  String serverName;
+  String sessionID;
+  String userName;
+  
   @Override
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
@@ -35,9 +39,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
 
 
-      final String serverName = "";
-      final String sessionID = "";
-      final String userName = "";
+
       try {
 
         JSONObject options = args.getJSONObject(0);
