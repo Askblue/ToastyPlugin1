@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     {
 
 
-        ArrayList<String> permissionsArray = new ArrayList<>(2);
+        ArrayList<String> permissionsArray = new ArrayList();
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
             permissionsArray.add(Manifest.permission.CAMERA);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED)
