@@ -120,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
                 String server = _serverView.getText().toString();
                 String sessionId = _sessionIdView.getText().toString();
                 String user = _userView.getText().toString();
+
+                Log.v("server: ", server);
+                Log.v("sessionId: ", sessionId);
+                Log.v("user: ", user);
+
                 if(server.length() > 0 && sessionId.length() > 0 && user.length()>0)
                 {
 
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
     void manageMainPermissions()
     {
 
-/*
+
         ArrayList<String> permissionsArray = new ArrayList<>(2);
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
             permissionsArray.add(Manifest.permission.CAMERA);
@@ -173,6 +178,6 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissionsArray.toArray(new String[permissionsArray.size()]),
                     REQUEST_CODE_ASK_PERMISSIONS);
 
-*/
+
     }
 }

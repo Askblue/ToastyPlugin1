@@ -35,9 +35,9 @@ public class ToastyPlugin extends CordovaPlugin {
 
 
 
-      final String serverName;
-      final String sessionID;
-      final String userName;
+      final String serverName = "";
+      final String sessionID = "";
+      final String userName = "";
       try {
 
         JSONObject options = args.getJSONObject(0);
@@ -66,9 +66,9 @@ public class ToastyPlugin extends CordovaPlugin {
        public void run() {
 
           Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), MainActivity.class);
-          intentScan.putExtra("serverName", "collaborativespace.net");
-          intentScan.putExtra("sessionID", "81");
-          intentScan.putExtra("userName", "Carlos");
+          intentScan.putExtra("serverName", serverName);
+          intentScan.putExtra("sessionID", sessionID);
+          intentScan.putExtra("userName", userName);
 
           //String package_name = cordova.getApplication().getPackageName();
           //Resources resources = getApplication().getResources();

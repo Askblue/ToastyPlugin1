@@ -6,7 +6,7 @@ repositories{
 }
 
 dependencies {
-   implementation(name:'sptIMSDK-release', ext:'aar')
+   implementation(name:'sptIMSDK-release1', ext:'aar')
 }
 
 android {
