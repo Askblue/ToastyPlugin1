@@ -21,6 +21,7 @@ import com.clearone.sptimpublicsdk.ISptIMSDK;
 import com.clearone.sptimpublicsdk.ISptSDKCallObserver;
 import com.clearone.sptimpublicsdk.SptCallID;
 import com.clearone.sptimpublicsdk.SptJoinCall;
+import com.clearone.sptimpublicsdk.SptIMSDKApp;
 
 import java.util.ArrayList;
 
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     EditText _userView;
     Button _connectButton;
     SptCallID _callID;
-
-    TestConnectMeetingApplication _app;
+    SptIMSDKApp _app;
+    //TestConnectMeetingApplication _app;
 
     ISptIMSDK _sdk;
     TestConnectSptCallObserver _callObserver;
@@ -83,6 +84,10 @@ package_name = "com.stanleyidesis.cordova.plugin";
        String serverName = intent.getStringExtra("serverName");
        String sessionID = intent.getStringExtra("sessionID");
        String userName = intent.getStringExtra("userName");
+
+       _app = SptIMSDKApp.getInstance();
+       _sdk = _app.getSptIMSDK(getApplicationContext());
+
       //  String activity_main_connect_buttonData = intent.getStringExtra("activity_main_connect_button");
       //  setContentView(R.layout.activity_main);
    //Log.v("activity_main_connect_buttonData: ", activity_main_connect_buttonData);
@@ -91,7 +96,7 @@ package_name = "com.stanleyidesis.cordova.plugin";
       //  _sdk = _app.getSptIMSDK(); // new
       //  _sdk = ((TestConnectMeetingApplication)getApplication()).getSptIMSDK();
         _callObserver = new TestConnectSptCallObserver();
-      // help  _sdk.addCallObserver(_callObserver);
+      _sdk.addCallObserver(_callObserver);
       //  _serverView = (EditText)findViewById(R.id.activity_main_server);
       //  _sessionIdView = (EditText)findViewById(R.id.activity_main_id);
       //  _userView = (EditText)findViewById(R.id.activity_main_user);
@@ -117,10 +122,10 @@ package_name = "com.stanleyidesis.cordova.plugin";
                 if(server.length() > 0 && sessionId.length() > 0 && user.length()>0)
                 {
 
-
+                  //  launchIntent();
+                    SptJoinCall joinCall = new SptJoinCall(user, "", sessionId, server);
+                    _callID = _sdk.joinCall(joinCall);
                     launchIntent();
-                //    SptJoinCall joinCall = new SptJoinCall(user, "", sessionId, server);
-                //    _callID = _sdk.joinCall(joinCall);
                 }
             }
         });
@@ -130,10 +135,10 @@ package_name = "com.stanleyidesis.cordova.plugin";
     void launchIntent()
     {
 
-    //  Intent intentScan = new Intent(this, TestConnectMeetingApplication.class);
-    //  Intent intentScan = new Intent("com.stanleyidesis.cordova.plugin.TestConnectMeetingApplication");
+    Intent intentScan = new Intent(this, CallActivity.class);
+    // Intent intentScan = new Intent("com.stanleyidesis.cordova.plugin.TestConnectMeetingApplication");
 
-      Intent intentScan = getPackageManager().getLaunchIntentForPackage("com.clearone.testconnectmeeting");
+    //  Intent intentScan = getPackageManager().getLaunchIntentForPackage("com.clearone.testconnectmeeting");
 
       this.startActivity(intentScan);
 
@@ -157,7 +162,7 @@ package_name = "com.stanleyidesis.cordova.plugin";
         if(permissionsArray.size()>0)
             ActivityCompat.requestPermissions(this, permissionsArray.toArray(new String[permissionsArray.size()]),
                     REQUEST_CODE_ASK_PERMISSIONS);
-*/
 
+*/
     }
 }

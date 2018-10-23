@@ -53,9 +53,9 @@ public class ToastyPlugin extends CordovaPlugin {
        public void run() {
 
           Intent intentScan = new Intent(that.cordova.getActivity().getBaseContext(), MainActivity.class);
-          intentScan.putExtra("serverName", serverName);
-          intentScan.putExtra("sessionID", sessionID);
-          intentScan.putExtra("userName", userName);
+          intentScan.putExtra("serverName", "collaborativespace.net");
+          intentScan.putExtra("sessionID", "81");
+          intentScan.putExtra("userName", "Carlos");
 
           //String package_name = cordova.getApplication().getPackageName();
           //Resources resources = getApplication().getResources();

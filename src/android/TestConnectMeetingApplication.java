@@ -31,9 +31,4 @@ import java.util.ArrayList;
 public class TestConnectMeetingApplication extends SptIMSDKApp {
 
 
-  protected void onCreate(Bundle savedInstanceState) {
-    
-
-  }
-
 }

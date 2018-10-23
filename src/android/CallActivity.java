@@ -24,6 +24,7 @@ import com.clearone.sptimpublicsdk.ISptCallServices;
 import com.clearone.sptimpublicsdk.SptCallFragment;
 import com.clearone.sptimpublicsdk.SptCallID;
 import com.clearone.sptimpublicsdk.SptCallParticipantID;
+import com.clearone.sptimpublicsdk.SptIMSDKApp;
 
 import com.stanleyidesis.cordova.plugin.TestConnectMeetingApplication;
 
@@ -34,6 +35,7 @@ public class CallActivity extends AppCompatActivity implements SptCallFragment.O
     public static final String EXTRA_CALL_ID = "EXTRA_CALL_ID";
     SptCallID _callID;
     SptCallParticipantID _localParticipantID = new SptCallParticipantID(SPT_LOCAL_CALLPARTICIPANT_ID);
+    SptIMSDKApp _app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +44,14 @@ public class CallActivity extends AppCompatActivity implements SptCallFragment.O
 
         String package_name = getApplication().getPackageName();
         Resources resources = getApplication().getResources();
-        setContentView(resources.getIdentifier("activity_call", "layout", package_name));
+        setContentView(resources.getIdentifier("content_main", "layout", package_name));
 
         int callId = getIntent().getIntExtra(EXTRA_CALL_ID, SptCallID.SPT_INVALID_CALLID);
         _callID = new SptCallID(callId);
 
-
+        _app = SptIMSDKApp.getInstance();
         //Toolbar tb = (Toolbar)findViewById(R.id.activity_call_tool_bar);
-        Toolbar tb = (Toolbar)findViewById(resources.getIdentifier("activity_call_tool_bar", "layout", package_name));
+        Toolbar tb = (Toolbar)findViewById(resources.getIdentifier("activity_call_tool_bar", "id", package_name));
         setSupportActionBar(tb);
         //Keep screen always on during a call
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -64,7 +66,7 @@ public class CallActivity extends AppCompatActivity implements SptCallFragment.O
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             Fragment f = SptCallFragment.newInstance(_callID, true, null);
-            ft.replace(resources.getIdentifier("activity_call_content", "layout", package_name), f);
+            ft.replace(resources.getIdentifier("activity_call_content", "id", package_name), f);
             //ft.replace(R.id.activity_call_content, f);
             ft.commit();
         }
@@ -72,14 +74,19 @@ public class CallActivity extends AppCompatActivity implements SptCallFragment.O
 
     private void requestServiceState(int serviceId, boolean bActivate)
     {
-        TestConnectMeetingApplication app = (TestConnectMeetingApplication) getApplication();
-        app.getSptIMSDK().setServiceState(_callID, _localParticipantID,serviceId, bActivate);
+        //_app = SptIMSDKApp.getInstance();
+        _app.getSptIMSDK(getApplicationContext()).setServiceState(_callID, _localParticipantID,serviceId, bActivate);
+
+    //    TestConnectMeetingApplication app = (TestConnectMeetingApplication) getApplication();
+      //  app.getSptIMSDK().setServiceState(_callID, _localParticipantID,serviceId, bActivate);
     }
 
     @Override
     public void onCallHangButtonPressed() {
-        TestConnectMeetingApplication app = (TestConnectMeetingApplication) getApplication();
-        app.getSptIMSDK().hangUpCall(_callID);
+        //TestConnectMeetingApplication app = (TestConnectMeetingApplication) getApplication();
+
+        _app.getSptIMSDK(getApplicationContext()).hangUpCall(_callID);
+      //  app.getSptIMSDK().hangUpCall(_callID);
         finish();
     }
 
@@ -142,8 +149,9 @@ public class CallActivity extends AppCompatActivity implements SptCallFragment.O
 
     @Override
     public void activateWhiteboard(boolean b) {
-        TestConnectMeetingApplication app = (TestConnectMeetingApplication) getApplication();
-        app.getSptIMSDK().setServiceState(_callID, _localParticipantID, ISptCallServices.eSptCallServiceWhiteboard, b);
+      //  TestConnectMeetingApplication app = (TestConnectMeetingApplication) getApplication();
+        _app.getSptIMSDK(getApplicationContext()).setServiceState(_callID, _localParticipantID, ISptCallServices.eSptCallServiceWhiteboard, b);
+      //  app.getSptIMSDK().setServiceState(_callID, _localParticipantID, ISptCallServices.eSptCallServiceWhiteboard, b);
 
     }
 }
